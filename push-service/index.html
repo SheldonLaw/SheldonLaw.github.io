@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0">
+	<link rel="manifest" href="./manifest.json">
+	<title>推送服务管理</title>
+	<style type="text/css">
+		button {
+			border: none;
+			border-radius: 5px;
+		    padding: 10px;
+			color: white;
+		}
+		header {
+			font-size: 20px;
+			padding: 100px 0;
+			text-align: center;
+		}
+		.ctr-section {
+			text-align: center;
+			padding: 30px 0;
+		}
+		.input-form form > div {
+			width: 100%;
+			text-align: center;
+		    margin: 10px 0;
+		}
+		.input-form form > div > input {
+		    height: 30px;
+		    min-width: 250px;
+			text-align: center;
+			background-color: #fafbfc;
+			border: none;
+			border-radius: 5px;
+		}
+		#push-btn {
+			background-color: #2ecc71;
+		}
+		#push-btn.on {
+			background-color: #e74c3c;
+		}
+		#send-btn {
+			margin-top: 30px;
+			background-color: #3498db;
+		}
+	</style>
+</head>
+<body>
+	<header>欢迎来到推送服务管理界面</header>
+	<section class="ctr-section">
+		<button id="push-btn">关闭推送</button>
+	</section>
+	<section class="input-form">
+		<form name="pushContentForm" onsubmit="return false">
+			<div><input type="text" name="title" placeholder="请输入推送标题" /></div>
+			<div><input type="text" name="content" placeholder="请输入推送内容" /></div>
+			<div><input type="link" name="link" placeholder="请输入跳转链接" /></div>
+			<div><button id="send-btn">测试推送（3s之后发送</button></div></section>
+		</form>
+	<script type="text/javascript" src="./main.js"></script>
+</body>
+</html>
