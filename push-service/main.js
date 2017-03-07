@@ -23,11 +23,15 @@ if ('serviceWorker' in navigator) {
             setTimeout(function() {
                 title = title || '推送标题';
                 content = content || '推送内容';
-                var icon = 'https://p.pstatp.com/origin/18aa0001c56ac61f17b2';
+                // just for fun
+                var icon = 'http://fhyishu.org/pic/fanhaopic/PPT-018.jpg';
+                // var image = 'https://p.pstatp.com/origin/18aa0001c56ac61f17b2'
                 var tag = 'simple-push-demo-notification-tag';
+                // https://developer.mozilla.org/zh-CN/docs/Web/API/ServiceWorkerRegistration/showNotification
                 serviceWorkerRegistration.showNotification(title, {
                     body: content,
                     icon: icon,
+                    // image: image,
                     tag: tag,
                     data: link
                 })
