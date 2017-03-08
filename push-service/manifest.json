@@ -2,8 +2,32 @@
     "name": "Push Demo",
     "short_name": "Push Demo",
     "display": "standalone",
-    "gcm_sender_id": "985127393581",
-
-    "//": "gcm_user_visible_only is only needed until Chrome 44 is in stable ",
-    "gcm_user_visible_only": true
+    "start_url": "/push-service/?from=homescreen",
+    "icons": [{
+        "src": "https://airhorner.com/images/touch/Airhorner_128.png",
+        "type": "image/png",
+        "sizes": "128x128"
+      }, {
+        "src": "https://airhorner.com/images/touch/Airhorner_152.png",
+        "type": "image/png",
+        "sizes": "152x152"
+      }, {
+        "src": "https://airhorner.com/images/touch/Airhorner_144.png",
+        "type": "image/png",
+        "sizes": "144x144"
+      }, {
+        "src": "https://airhorner.com/images/touch/Airhorner_192.png",
+        "type": "image/png",
+        "sizes": "192x192"
+      },
+      {
+        "src": "https://airhorner.com/images/touch/Airhorner_256.png",
+        "type": "image/png",
+        "sizes": "256x256"
+      },
+      {
+        "src": "https://airhorner.com/images/touch/Airhorner_512.png",
+        "type": "image/png",
+        "sizes": "512x512"
+      }]
 }

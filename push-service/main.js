@@ -2,10 +2,22 @@
 var pushEnabled = false;
 var pushBtn = document.querySelector('#push-btn');
 var sendBtn = document.querySelector('#send-btn');
-if ('serviceWorker' in navigator) {
+
+// load from localStorage
+var title, content, link;
+if(localStorage) {
+    title = localStorage.title;
+    content = localStorage.content;
+    link = localStorage.link;
+    if(title) pushContentForm.title.value = title;
+    if(content) pushContentForm.content.value = content;
+    if(link) pushContentForm.link.value = link;
+}
+
+if('serviceWorker' in navigator) {
     navigator.serviceWorker.register('./service-worker.js').then(initialiseState);
     pushBtn.addEventListener('click', function() {
-        if (!pushEnabled) {
+        if(!pushEnabled) {
             //注册
             subscribe();
         } else {
@@ -13,11 +25,21 @@ if ('serviceWorker' in navigator) {
         }
     });
     sendBtn.addEventListener('click', function() {
-        if(!pushEnabled) alert("请先开启推送。");
+        if(!pushEnabled) {
+            alert("请先开启推送。");
+            return;
+        }
 
-        var title = pushContentForm.title.value;
-        var content = pushContentForm.content.value;
-        var link = pushContentForm.link.value;
+        title = pushContentForm.title.value;
+        content = pushContentForm.content.value;
+        link = pushContentForm.link.value;
+        
+        //save into localStorage
+        if(localStorage) {
+            localStorage.title = title;
+            localStorage.content = content;
+            localStorage.link = link;
+        }
 
         navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {
             setTimeout(function() {
@@ -43,17 +65,17 @@ if ('serviceWorker' in navigator) {
 }
 
 function initialiseState() {
-    if (!('showNotification' in ServiceWorkerRegistration.prototype)) {
+    if(!('showNotification' in ServiceWorkerRegistration.prototype)) {
         alert('当前浏览器不支持通知。');
         return;
     }
 
-    if (Notification.permission === 'denied') {
+    if(Notification.permission === 'denied') {
         alert('用户已屏蔽通知。');
         return;
     }
 
-    if (!('PushManager' in window)) {
+    if(!('PushManager' in window)) {
         alert('当前浏览器不支持推送。');
         return;
     }
@@ -61,7 +83,7 @@ function initialiseState() {
     navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {
         serviceWorkerRegistration.pushManager.getSubscription()
             .then(function(subscription) {
-                if (!subscription) {
+                if(!subscription) {
                     pushBtn.textContent = "开启推送";
                     pushEnabled = false;
                 } else {
@@ -85,7 +107,7 @@ function subscribe() {
                 return sendSubscriptionToServer(subscription);
             })
             .catch(function(e) {
-                if (Notification.permission === 'denied') {
+                if(Notification.permission === 'denied') {
                     alert('没有获取到权限');
                 } else {
                     alert('发生错误', e);
@@ -99,7 +121,7 @@ function unSubscribe() {
     .then(function(serviceWorkerRegistration) {
         serviceWorkerRegistration.pushManager.getSubscription()
         .then(function(pushSubscription) {
-            if (!pushSubscription) {
+            if(!pushSubscription) {
                 return;
             }
             pushSubscription.unsubscribe()
@@ -119,7 +141,7 @@ function unSubscribe() {
 }
 
 function sendSubscriptionToServer(subscription) {
-    if (!subscription) {
+    if(!subscription) {
         pushBtn.textContent = "开启推送";
         pushEnabled = false;
     } else {
