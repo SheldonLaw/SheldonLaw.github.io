@@ -3,6 +3,7 @@
     "short_name": "Push Demo",
     "display": "standalone",
     "start_url": "/push-service/?from=homescreen",
+    "gcm_sender_id": "985127393581",
     "icons": [{
         "src": "https://airhorner.com/images/touch/Airhorner_128.png",
         "type": "image/png",
