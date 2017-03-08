@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style type="text/css">
+		body {
+			padding: 0;
+			margin: 0;
+		}
+		button {
+			border: none;
+		    color: white;
+		    background-color: white;
+		    width: 100%;
+		    height: 30px;
+		    line-height: 30px;
+	        background-image: url(ic_push.png);
+		    background-repeat: no-repeat;
+		    background-position: 50% 50%;
+	        background-size: contain;
+		}
+	</style>
+	<script type="text/javascript">
+		function push() {
+           var title = localStorage.title, 
+           	   content = localStorage.content,
+           	   link = localStorage.link;
+
+        navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {
+            setTimeout(function() {
+                title = title || '推送标题';
+                content = content || '推送内容';
+                // just for fun
+                var icon = 'http://fhyishu.org/pic/fanhaopic/PPT-018.jpg';
+                // var image = 'https://p.pstatp.com/origin/18aa0001c56ac61f17b2'
+                var tag = 'simple-push-demo-notification-tag';
+                // https://developer.mozilla.org/zh-CN/docs/Web/API/ServiceWorkerRegistration/showNotification
+                serviceWorkerRegistration.showNotification(title, {
+                    body: content,
+                    icon: icon,
+                    // image: image,
+                    tag: tag,
+                    data: link
+                })
+            }, 3000);
+        });
+		}
+	</script>
+</head>
+<body>
+	<button onclick="push()"></button>
+</body>
+</html>
