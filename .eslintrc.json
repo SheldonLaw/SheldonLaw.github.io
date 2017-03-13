@@ -1,0 +1,6 @@
+{
+    "extends": ["ttdefault"],
+	"rules": {
+	    // Additional, per-project rules... 
+	}
+}
