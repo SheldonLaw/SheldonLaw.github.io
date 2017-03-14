@@ -1,5 +1,6 @@
-#Sheldon Law
-##personal space
+# Sheldon Law
 
-###subdirectory
+## personal space
+
+### subdirectory
  - push-service: A simple demo of service worker.
