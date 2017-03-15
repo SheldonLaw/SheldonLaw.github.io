@@ -1,8 +1,40 @@
 (function () {
     'use strict';
-    // var version = '1.0.0';
+    var cacheVersion = 1.0;
+    var currentCache = {
+        offline: 'offline-cache' + cacheVersion
+    };
 
-    // console.log(version, self);
+    var cacheUrl = [
+        'index.html',
+        'main.js'
+    ];
+
+    this.addEventListener('install', event => {
+        event.waitUntil(
+            caches.open(currentCache.offline).then(function (cache) {
+                return cache.addAll(cacheUrl);
+            })
+      );
+    });
+
+    this.addEventListener('fetch', event => {
+
+        if (event.request.mode === 'navigate' || (event.request.method === 'GET' && event.request.headers.get('accept').includes('text/html'))) {
+            event.respondWith(
+                fetch(event.request.url).catch(error => {
+                    // Return the offline page
+                    return caches.match('index.html');
+                })
+            );
+        } else {
+            event.respondWith(caches.match(event.request)
+                .then(function (response) {
+                    return response || fetch(event.request);
+                })
+            );
+        }
+    });
 
     self.addEventListener('push', function (event) {
         // console.log('Received a push message', event);
