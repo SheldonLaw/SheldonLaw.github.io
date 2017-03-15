@@ -10,7 +10,7 @@
         'main.js'
     ];
 
-    this.addEventListener('install', event => {
+    self.addEventListener('install', event => {
         event.waitUntil(
             caches.open(currentCache.offline).then(function (cache) {
                 return cache.addAll(cacheUrl);
@@ -18,7 +18,7 @@
       );
     });
 
-    this.addEventListener('fetch', event => {
+    self.addEventListener('fetch', event => {
 
         if (event.request.mode === 'navigate' || (event.request.method === 'GET' && event.request.headers.get('accept').includes('text/html'))) {
             event.respondWith(
