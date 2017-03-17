@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<!-- reference： https://developers.google.com/web/updates/2015/04/cut-and-copy-commands -->
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0">
+	<link rel="shortcut" href="/favicon.ico">
+	<link rel="icon" sizes="16x16" type="image/ico" href="/favicon.ico">
+	<link rel="icon" sizes="32x32" type="image/ico" href="/favicon.ico">
+	<link rel="icon" sizes="48x48" type="image/ico" href="/favicon.ico">
+	<title>Cut and Copy Commands</title>
+	<style type="text/css">
+		button {
+			border: none;
+			border-radius: 5px;
+		    padding: 10px;
+			color: white;
+			background-color: #3498db;
+		}
+		textarea {
+			min-width: 200px;
+		}
+		section {
+			margin: 20px 0;
+		}
+		header, footer {
+			padding: 10px 0;
+		}
+	</style>
+</head>
+<body>
+	<header>Cut and Copy Commands - DEMO</header>
+	<section>
+		<textarea></textarea>
+		<button onclick="onCommand('copy')">copy</button>
+		<button onclick="onCommand('cut')">cut</button>
+	</section>
+	<footer>You can learn more detail in <a href="https://developers.google.com/web/updates/2015/04/cut-and-copy-commands">developers.google.com</a></footer>
+    <script type="text/javascript">
+        var textarea = document.querySelector('textarea');
+        function onCommand (command) {
+            textarea.select();
+            var successful = document.execCommand(command);
+            var msg = command + (successful ? ' succeed.' : ' failed.');
+            alert(msg);
+        }
+    </script>
+</body>
+</html>
