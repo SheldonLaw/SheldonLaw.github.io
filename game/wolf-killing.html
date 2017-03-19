@@ -1,0 +1,230 @@
+<!-- wolf-killing game
+created by Sheldon Law on 2016-05-09
+ -->
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF8">
+    <style type="text/css">
+      body{ 
+        font-size: 60px;
+        text-align: center;
+      } 
+      .title{
+        margin-top: 20px;
+      }
+      .sub_title{
+        margin-top: 40px;
+      }
+      .slider{
+        margin-top: 20px;
+      }
+      .role_container{
+        margin-top: 80px;
+      }
+      .table{
+        margin-top: 20px;
+        width: 75%;
+        height: 45%;
+      }
+      .table tr th{
+        width: 33.3%;
+        height: 33.3%;
+        font-size: 40px;
+      }
+      .btn{
+        margin-top: 50px;
+        font-size: 40px;
+        width: 30%;
+      }
+    </style>
+    <title>狼人游戏</title>
+  </head>
+  <body>
+    <!-- title -->
+    <div class="title">狼人游戏</div>
+    <div id="start_page">
+      <div id="participants" class="sub_title">5人</div>
+      <div class="slider">
+        <input id="slider" style="width:70%;" type="range" value="5" min="5" max="30" step="1" onchange="change()" />
+      </div>
+      <div class="role_container">
+        <table class="table" align="center" border="1">
+          <tr>
+            <th onclick="change_role_num()">
+              <div>狼人</div>
+              <div id="1">0个</div>
+            </th>
+            <th>
+              <div>女巫</div>
+              <div id="2">0个</div>
+            </th>
+            <th>
+            <div>普通村民</div>
+              <div id="3">0个</div>
+            </th>
+          </tr>
+          <tr>
+            <th>
+              <div>守卫</div>
+              <div id="4">0个</div>
+            </th>
+            <th>
+              <div>预言家</div>
+              <div id="5">0个</div>
+            </th>
+            <th>
+            <div>猎人</div>
+              <div id="6">0个</div>
+            </th>
+          </tr>
+          <tr>
+            <th>
+              <div>丘比特</div>
+              <div id="7">0个</div>
+            </th>
+            <th>
+              <div>白痴</div>
+              <div id="8">0个</div>
+            </th>
+            <th>
+            <div>长老</div>
+              <div id="9">0个</div>
+            </th>
+          </tr>
+        </table>
+      </div>
+      <button class="btn" onclick="start()">开始</button>
+    </div>
+    <div id="role_page" style="display:none;">
+      <div class="sub_title" id="player">1号玩家</div>
+      <table id="role_display" class="table" align="center" border="1">
+        <tr>
+          <th>请点击下面按钮翻牌</th>
+        </tr>
+      </table>
+      <div>
+        <button id="choose_btn" class="btn" onclick="choose_role()">翻牌</button>
+        <button id="had_choose_btn" class="btn" disabled="disabled" onclick="had_chosen()">记住了</button>
+      </div>
+    </div>
+    <script type="text/javascript">
+      function init(){
+        sum = 5;
+        role_num = [0,0,0,0,0,0,0,0,0,0];
+        role = [];
+        c_player = 1;
+        document.getElementById("player").innerHTML = c_player + "号玩家";
+        change();
+      }
+      function change(){ 
+        sum = document.getElementById("slider").value; 
+
+        // change display label
+        var label = document.getElementById("participants"); 
+        label.innerHTML = sum + "人"; 
+
+        role_num[1] = Math.round(sum/3);
+        role_num[2] = 1;
+        role_num[4] = sum>=6 ? 1:0;
+        role_num[5] = sum>=8 ? 1:0;
+        role_num[6] = sum>=11 ? 1:0;
+        role_num[7] = sum>=12 ? 1:0;
+        role_num[8] = sum>=14 ? 1:0;
+        role_num[9] = sum>=16 ? 1:0;
+
+        role_num[3] = sum
+        for(var i=1;i<10;i++) {
+          if(i!=3){
+            role_num[3] -= role_num[i];
+          }
+        };
+
+        //update table
+        for(var i=1;i<10;i++){
+          document.getElementById(i).innerHTML = role_num[i] + "人";
+        };
+      } 
+
+      function start(){
+        sum = document.getElementById("slider").value;
+        //hide start_page and show role_page
+        document.getElementById("start_page").style.display="none";
+        document.getElementById("role_page").style.display="block";
+
+        //divide role ramdonly
+        for(var i=0;i<sum;i++){
+          var end = false;
+          while(!end){
+            var ramdon_choice = parseInt(Math.random()*9+1);
+            if(role_num[ramdon_choice]>0){
+              role[i]=ramdon_choice;
+              role_num[ramdon_choice] -= 1;
+              end = true;
+            }
+          }
+        }
+      }
+      function choose_role(){
+        document.getElementById("choose_btn").disabled = "disabled";
+        document.getElementById("had_choose_btn").disabled = null;
+
+        var role_display_tb =  document.getElementById("role_display");
+        var role_tips;
+        switch(role[c_player-1])
+        {
+          case 1:
+            role_tips = '狼人：在天黑的时候负责杀人。';
+            break;
+          case 2:
+            role_tips = '女巫：你有一瓶毒药和一瓶解药。';
+            break;
+          case 3:
+            role_tips = '普通村民：没有任何功能的好人。';
+            break;
+          case 4:
+            role_tips = '守卫：在每一轮中都能守护一个人，不能连续守卫同一个人。';
+            break;
+          case 5:
+            role_tips = '预言家：在每一轮的环节里，都能验明一个人的身份。';
+            break;
+          case 6:
+            role_tips = '猎人：被杀死之后可凭直觉带走一个人。';
+            break;
+          case 7:
+            role_tips = '丘比特：可以指定两个玩家成为情侣，情侣共存亡。';
+            break;
+          case 8:
+            role_tips = '白痴：第一回合可以跳身份，任何时间都能讲话，没有投票权。';
+            break;
+          case 9:
+            role_tips = '长老：两条命，死了之后好人技能全失。';
+            break;
+          default:
+            role_tips = '错误！';
+        }
+        role_display_tb.innerHTML = "<tr><th>"+role_tips+"</th></tr>";
+      }
+      function had_chosen(){
+        document.getElementById("choose_btn").disabled = null;
+        document.getElementById("had_choose_btn").disabled = "disabled";
+        var role_display_tb =  document.getElementById("role_display");
+        role_display_tb.innerHTML = "<tr><th>请点击下面按钮翻牌</th></tr>";
+        c_player += 1;
+        if (c_player > sum) {
+          //back to start_page
+          document.getElementById('start_page').style.display="block";
+          document.getElementById('role_page').style.display="none";
+          init();
+          return null;
+        }
+        document.getElementById('player').innerHTML = c_player + '号玩家';
+      }
+
+      function change_role_num(){
+        console.log("test")
+      }
+      //init
+      init();
+    </script>
+  </body>
+</html>

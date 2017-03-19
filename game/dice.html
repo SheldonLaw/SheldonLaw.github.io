@@ -18,12 +18,12 @@
 <button onclick="game()">摇一摇</button>
 <script type="text/javascript">
 	var el = document.querySelector('#result');
-	function game() {
-		var result = "";
-		for(var i = 1; i< 6; i++) {
+	function game () {
+		var result = '';
+		for(var i = 1; i < 6; i++) {
 			var num = Math.random() * 6 + 1;
 			var r = num.toString()[0];
-			result += r + " ";
+			result += r + ' ';
 		}
 		el.innerText = result;
 	}
