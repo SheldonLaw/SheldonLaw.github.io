@@ -133,7 +133,7 @@ if ('serviceWorker' in navigator) {
                 title = title || '推送标题';
                 content = content || '推送内容';
                 // just for fun
-                var icon = 'http://fhyishu.org/pic/fanhaopic/PPT-018.jpg';
+                var icon = 'your icon here';
                 // var image = 'https://p.pstatp.com/origin/18aa0001c56ac61f17b2'
                 var tag = 'simple-push-demo-notification-tag';
                 // https://developer.mozilla.org/zh-CN/docs/Web/API/ServiceWorkerRegistration/showNotification
