@@ -1,6 +1,10 @@
 {
-    "extends": ["ttdefault"],
+    "extends": ["google"],
 	"rules": {
 	    // Additional, per-project rules... 
+	    "no-console": "off",
+	    "no-tabs": "off",
+	    "no-var": "off",
+	    "require-jsdoc": "off"
 	}
 }
