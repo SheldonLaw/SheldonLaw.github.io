@@ -1,4 +1,6 @@
-# Logging v1.0.0
+# Logging 
+
+version: v1.0.1
 
 A super lightweight JavaScript lib as a substitute for `console.log()` in error catch.
 
@@ -19,19 +21,7 @@ if (a != null) {
 	// handle exception
 	// ...
 }
-```
 
-### with `Logging`
-```js
-var a = yourFunc();
-// we expect 'a' to be a not null variable, so we need to check
-Logging.check(a);
-// go ahead
-// ...
-```
-
-### without `Logging`
-```js
 switch(a) {
 	case 1:
 		// your logic here
@@ -39,10 +29,23 @@ switch(a) {
 	default:
 		console.log('error happend');
 }
+
+var a = 'hello Logging';
+var index = a.indexOf('Logging');
+if (index != -1) {
+	console.log(substr(index, a.length));	// get 'Logging'
+}
+
 ```
 
 ### with `Logging`
 ```js
+var a = yourFunc();
+// we expect 'a' to be a not null variable, so we need to check
+Logging.check(a);	// more: Logging.check(a, b) can ensure 'a == b'
+// go ahead
+// ...
+
 switch(a) {
 	case 1:
 		// your logic here
@@ -50,6 +53,12 @@ switch(a) {
 	default:
 		Logging.unReach();
 }
+
+var a = 'hello Logging';
+var index = a.indexOf('Logging');
+Logging.checkUE(index, -1);
+console.log(substr(index, a.length));	// get 'Logging'
+
 ```
 
 ## More
