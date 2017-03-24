@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<!-- reference： https://developers.google.com/web/updates/2017/02/media-session -->
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0">
+	<meta charset="utf-8">
+	<link rel="shortcut" href="/favicon.ico">
+	<link rel="icon" sizes="16x16" type="image/ico" href="/favicon.ico">
+	<link rel="icon" sizes="32x32" type="image/ico" href="/favicon.ico">
+	<link rel="icon" sizes="48x48" type="image/ico" href="/favicon.ico">
+	<title>Web music player</title>
+	<style type="text/css">
+		.artwork-container {
+			height: 300px;
+		}
+		.artwork-container {
+		    height: 300px;
+		    position: relative;
+		    width: 100%;
+		    overflow-x: hidden;
+		}
+		.artwork-container img {
+			height: 100%;
+		    box-sizing: border-box;
+		    position: absolute;
+		    left: 50%;
+		    transform: translate(-50%,0);
+		}
+		.player-controller, .music-info {
+			text-align: center;
+		}
+		audio {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 1px;
+			height: 1px;
+			opacity: 0;
+		}
+		button {
+			border: none;
+			border-radius: 5px;
+		    padding: 10px;
+			color: white;
+		    min-width: 80px;
+		}
+		button.play {
+			background-color: #e74c3c;
+		}
+		button.pause {
+			background-color: #2ecc71;
+		}
+		footer {
+			margin: 50px 0;
+		}
+	</style>
+</head>
+<body>
+	<header>
+		<h1>Simple Web music player</h1>
+		<h2>With <a href='https://developers.google.com/web/updates/2017/02/media-session'>media session api</a></h2>
+	</header>
+	<section>
+		<audio></audio>
+		<div class="artwork-container"><img src="" /></div>
+		<div class="music-info">
+			<p class="title"></p>
+			<p class="artist"></p>
+		</div>
+		<div class="player-controller">
+			<button data-command='pre'> < </button>
+			<button data-command='play'>play</button>
+			<button data-command='next'> > </button>
+		</div>
+	</section>
+	<footer>You can learn more detail in <a href="https://developers.google.com/web/updates/2017/02/media-session">developers.google.com</a></footer>
+	<script type="text/javascript" src="./player-main.js"></script>
+</body>
+</html>
