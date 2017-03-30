@@ -24,10 +24,10 @@ if (a != null) {
 
 switch(a) {
   case 1:
-		// your logic here
-		break;
+    // your logic here
+    break;
   default:
-		console.log('error happend');
+    console.log('error happend');
 }
 
 var a = 'hello Logging';
@@ -49,7 +49,7 @@ Logging.check(a);	// more: Logging.check(a, b) can ensure 'a == b'
 switch(a) {
   case 1:
     // your logic here
-	  break;
+    break;
   default:
     Logging.unReach();
 }
