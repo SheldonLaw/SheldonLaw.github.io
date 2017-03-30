@@ -14,7 +14,6 @@ input {
     width: 91px;
     height: 30px;
     border: 0;
-    font-size: 14px;
     background: rgb(90, 105, 117);
     cursor: pointer;
     -webkit-appearance: none;
@@ -26,15 +25,18 @@ input {
 }
 .button.right {
     border-radius: 0px 30px 30px 0px;
-    margin-left: -5px;
+    margin-left: -6px;
 }
 .input-bar {
+    height: 30px;
+    box-sizing: border-box;
 	min-width: 345px;
 	color: #6B6B6B;
 	-webkit-box-shadow: inset 1px 1px 5px rgba(90, 105, 117, 0.3);
     box-shadow: inset 1px 1px 5px rgba(90, 105, 117, 0.3);
     background-color: #DEDEDE;
     border: none;
+    border-radius: 0px;
     padding: 7.5px 5px 7.5px 10px;
 }
 .query-icon {
