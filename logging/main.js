@@ -22,7 +22,7 @@
 
 	// situation two:
 	function simpleSwitch(num) {
-		switch(num) {
+		switch (num) {
 			case 1:
 			case 2:
 				break;

@@ -15,25 +15,25 @@ A super lightweight JavaScript lib as a substitute for `console.log()` in error 
 var a = yourFunc();
 // we expect 'a' to be a not null variable, so we need to check
 if (a != null) {
-	// go ahead
-	// ...
+  // go ahead
+  // ...
 } else {
-	// handle exception
-	// ...
+  // handle exception
+  // ...
 }
 
 switch(a) {
-	case 1:
+  case 1:
 		// your logic here
 		break;
-	default:
+  default:
 		console.log('error happend');
 }
 
 var a = 'hello Logging';
 var index = a.indexOf('Logging');
 if (index != -1) {
-	console.log(substr(index, a.length));	// get 'Logging'
+  console.log(substr(index, a.length));	// get 'Logging'
 }
 
 ```
@@ -47,11 +47,11 @@ Logging.check(a);	// more: Logging.check(a, b) can ensure 'a == b'
 // ...
 
 switch(a) {
-	case 1:
-		// your logic here
-		break;
-	default:
-		Logging.unReach();
+  case 1:
+    // your logic here
+	  break;
+  default:
+    Logging.unReach();
 }
 
 var a = 'hello Logging';
