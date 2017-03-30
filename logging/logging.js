@@ -29,8 +29,8 @@
     };
 
     Logging.unReach = function() {
-		log('get unreach position');
-		throw new Error('Get unreach position in switch');
+      log('get unreach position');
+      throw new Error('Get unreach position in switch');
     };
 
     Logging.checkUE = function(target, expectation) {
