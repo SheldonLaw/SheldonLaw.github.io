@@ -1,0 +1,65 @@
+body {
+	background-color: #EFEFEF;
+}
+input {
+	outline: none;
+}
+.search-bar {
+    margin-top: 100px;
+	width: 100%; 
+	text-align: center;
+}
+.button {
+    color: #FFFFFF;
+    width: 91px;
+    height: 30px;
+    border: 0;
+    font-size: 14px;
+    background: rgb(90, 105, 117);
+    cursor: pointer;
+    -webkit-appearance: none;
+}
+.button.left {
+    border-radius: 30px 0px 0px 30px;
+    /* for more detail: http://www.zhangxinxu.com/wordpress/2012/04/inline-block-space-remove-%E5%8E%BB%E9%99%A4%E9%97%B4%E8%B7%9D/ */
+    margin-right: -6px;	
+}
+.button.right {
+    border-radius: 0px 30px 30px 0px;
+    margin-left: -5px;
+}
+.input-bar {
+	min-width: 345px;
+	color: #6B6B6B;
+	-webkit-box-shadow: inset 1px 1px 5px rgba(90, 105, 117, 0.3);
+    box-shadow: inset 1px 1px 5px rgba(90, 105, 117, 0.3);
+    background-color: #DEDEDE;
+    border: none;
+    padding: 7.5px 5px 7.5px 10px;
+}
+.query-icon {
+	background-repeat: no-repeat;
+    padding-left: 25px;
+    background-position: 5px;
+	background-image: url(./query.png);
+}
+/* 兼容mobile */
+@media (max-width: 767px) {
+	.search-bar {
+		position: fixed;
+		bottom: 100px;
+	    left: 0;
+	}
+	.input-bar {
+		min-width: 0;
+	}
+}
+/* 兼容iphone5 */
+@media (max-width: 320px){
+    .input-bar {
+    	width: 100px;
+    }
+    .button {
+    	width: 80px;
+    }
+}

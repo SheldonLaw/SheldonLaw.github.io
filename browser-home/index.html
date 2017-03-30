@@ -1,0 +1,44 @@
+<!-- reference: https://dama.lu/ -->
+<!-- for personal use -->
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0">
+	<title>搜索</title>
+	<link rel="stylesheet" type="text/css" href="./main.css">
+</head>
+<body>
+	<div class="search-bar">
+		<form id="search-form" action="https://www.baidu.com/baidu" target="_blank">
+			<input type="submit" value="谷歌一下" class="button left">
+			<!-- for google -->
+			<input name="q" type="hidden">
+			<!-- for baidu -->
+			<input type="text" name="word" class="input-bar query-icon"> 
+			<input type="submit" value="百度几下" class="button right">
+		</form>
+	</div>
+	<script type="text/javascript">
+		var form = document.querySelector('#search-form');
+		var qText = document.querySelector('input[name=q]');
+		var wordText = document.querySelector('input[name=word]');
+		var btns = document.querySelectorAll('input[type=submit]');
+		var onSubmit = function(e) {
+			switch(e.target.value) {
+				case '谷歌一下':
+					form.action = 'https://www.google.com/search';
+					qText.value = wordText.value;
+					break;
+				case '百度几下':
+					form.action = 'https://www.baidu.com/baidu';
+					break;
+				default:
+					return;
+			}
+		};
+		btns[0].addEventListener('click', onSubmit, false);
+		btns[1].addEventListener('click', onSubmit, false);
+	</script>
+</body>
+</html>
