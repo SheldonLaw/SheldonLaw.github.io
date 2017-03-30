@@ -6,17 +6,24 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,  user-scalable=no">
 	<title>搜索</title>
-	<link rel="stylesheet" type="text/css" href="./main.css">
+	<!-- <link rel="stylesheet" type="text/css" href="./main.css"> -->
+	<style type="text/css">
+		input{outline:0}.search-slogan{margin-top:100px;font-size:25px;font-family:fantasy;text-align:center}.search-slogan>.p1{margin-left:-30px}.p1-bg{background-image:url(p1-bg.png);background-repeat:no-repeat;padding:10px 0;background-size:contain;background-position-x:48%}.p2-bg{background-image:url(p2-bg.png);background-repeat:no-repeat;padding:10px 0;background-size:contain;background-position-x:52%}.search-slogan>.p2{margin-left:30px}.search-bar{margin-top:100px;width:100%;text-align:center}.button{font-size:16px;width:55px;height:40px;border:0;cursor:pointer;-webkit-appearance:none;vertical-align:middle}.button.left{color:white;background:#4d90fe;border-radius:10px 0 0 10px;margin-right:-6px;text-align:right;padding-right:10px}.button.right{color:white;background:#32ac56;border-radius:0 10px 10px 0;margin-left:-6px;text-align:left;padding-left:10px}.input-bar{height:40px;box-sizing:border-box;min-width:345px;border:1px solid #d9d9d9!important;border-radius:0;padding:7.5px 5px 7.5px 10px;font-size:18px;vertical-align:middle;-webkit-appearance:none}@media(max-width:767px){.search-slogan{margin-top:40%}.search-bar{position:fixed;bottom:150px;left:0}.input-bar{min-width:0}}@media(max-width:320px){.input-bar{width:180px}}
+	</style>
 </head>
 <body>
+	<div class="search-slogan">
+		<p class="p1 p1-bg">How big is the curiosity,</p>
+		<p class="p2 p2-bg">and how big the world is.</p>
+	</div>
 	<div class="search-bar">
 		<form id="search-form" target="_blank">
-			<input type="submit" value="谷歌一下" class="button left">
+			<input type="submit" value="谷歌" class="button left">
 			<!-- for google -->
 			<input name="q" type="hidden">
 			<!-- for baidu -->
-			<input type="text" name="word" class="input-bar query-icon"> 
-			<input type="submit" value="百度几下" class="button right">
+			<input type="text" name="word" class="input-bar"> 
+			<input type="submit" value="百度" class="button right">
 		</form>
 	</div>
 	<script type="text/javascript">
@@ -27,11 +34,11 @@
 		var isMobile = window.innerWidth < 768;
 		var onSubmit = function(e) {
 			switch(e.target.value) {
-				case '谷歌一下':
+				case '谷歌':
 					form.action = 'https://www.google.com/search';
 					qText.value = wordText.value;
 					break;
-				case '百度几下':
+				case '百度':
 					form.action = isMobile ? 'https://m.baidu.com/s' : 'https://www.baidu.com/baidu';
 					break;
 				default:
