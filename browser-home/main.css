@@ -29,6 +29,7 @@ input {
 }
 /*#fbc000*/
 .search-bar {
+    position: relative;
     margin-top: 100px;
 	width: 100%; 
 	text-align: center;
@@ -65,10 +66,25 @@ input {
 	min-width: 345px;
     border: 1px solid #d9d9d9 !important;
     border-radius: 0px;
-    padding: 7.5px 5px 7.5px 10px;
+    padding: 7.5px 25px 7.5px 10px;
     font-size: 18px;
     vertical-align: middle;
     -webkit-appearance: none;
+}
+.clear-btn {
+    position: absolute;
+    top: 10px;
+    display: inline-block;
+    background: url(./clear.png);
+    width: 20px;
+    height: 20px;
+    background-size: cover;
+    box-sizing: border-box;
+    margin-left: -30px;
+    cursor: pointer;
+}
+.clear-btn.hide {
+    display: none;
 }
 /* 推荐写法：把icon相关的样式写在一起，如果不需要，直接去掉即可。 */
 /*.query-icon {
