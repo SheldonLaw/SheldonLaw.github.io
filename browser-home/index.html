@@ -1,5 +1,6 @@
 <!-- reference: https://dama.lu/ -->
 <!-- for personal use -->
+<!-- TODO: 1. add search hint-->
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,20 +36,25 @@
 		var wordText = document.querySelector('input[name=word]');
 		var btns = document.querySelectorAll('input[type=submit]');
 		var clearBtn = document.querySelector('.clear-btn');
+		var searchType = '百度';
+
+		wordText.onkeypress = function(e) {
+			// onEnter
+			if (e.keyCode == 13) {
+				if (searchType == '百度') {
+					btns[1].click();
+				} else {
+					btns[0].click();
+				}
+				e.preventDefault();
+			}
+		};
+
 		var isMobile = window.innerWidth < 768;
 		form.action = isMobile ? 'https://m.baidu.com/s' : 'https://www.baidu.com/baidu';
 		var onSubmit = function(e) {
-			switch (e.target.value) {
-				case '谷歌':
-					form.action = 'https://www.google.com/search';
-					qText.value = wordText.value;
-					break;
-				case '百度':
-					form.action = isMobile ? 'https://m.baidu.com/s' : 'https://www.baidu.com/baidu';
-					break;
-				default:
-					return;
-			}
+			searchType = e.target.value;
+			search(searchType);
 		};
 		btns[0].addEventListener('click', onSubmit, false);
 		btns[1].addEventListener('click', onSubmit, false);
@@ -74,6 +80,20 @@
 		// wordText.addEventListener('blur', function() {
 		// 	console.log('blur');
 		// }, false);
+
+		function search(type) {
+			switch (type) {
+				case '谷歌':
+					form.action = 'https://www.google.com/search';
+					qText.value = wordText.value;
+					break;
+				case '百度':
+					form.action = isMobile ? 'https://m.baidu.com/s' : 'https://www.baidu.com/baidu';
+					break;
+				default:
+					return;
+			}
+		}
 	</script>
 </body>
 </html>
