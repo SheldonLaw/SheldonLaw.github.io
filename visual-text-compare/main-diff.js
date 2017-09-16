@@ -1,7 +1,7 @@
 // 测试数据
 var rawTextArr = [
-  ['input {', '.search-slogan {', '    outline: none;', '}', 'hello', 'world', 'come on', 'boy'].join('\n'),
-  ['.search-slogan {', '    outline: none;', '}', '.b {', 'position: relative;', '}', 'hello', 'web', 'come on'].join('\n'),
+  ['---start of file---', 'input {', '.search-slogan {', '    outline: none;', '}', 'hello', 'world', 'come on', 'boy', '---end of file---'].join('\n'),
+  ['---start of file---', '.search-slogan {', '    outline: none;', '}', '.b {', 'position: relative;', '}', 'hello', 'web', 'come on', '---end of file---'].join('\n'),
 ];
 
 var ols = document.querySelectorAll('ol');
