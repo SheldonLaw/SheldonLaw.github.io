@@ -1,7 +1,9 @@
-// 测试数据
+// 基本思想：单向数据流 - 数据 -> 界面 -> 改变数据 -> 重新渲染页面
+
+// 测试数据：包含增删改三种方式的产生的diff
 var rawTextArr = [
-  ['---start of file---', 'input {', '.search-slogan {', '    outline: none;', '}', 'hello', 'world', 'come on', 'boy', '---end of file---'].join('\n'),
-  ['---start of file---', '.search-slogan {', '    outline: none;', '}', '.b {', 'position: relative;', '}', 'hello', 'web', 'come on', '---end of file---'].join('\n'),
+  ['---start of file---', 'input {', '.search-slogan {', '    outline: none;', '}', 'hello', 'margin:10px 0', 'come on', 'padding: 10px;', 'app_20170910_min.css', '---end of file---'].join('\n'),
+  ['---start of file---', '.search-slogan {', '    outline: none;', '}', '.b {', 'position: relative;', '}', 'hello', 'margin:20px 10px', 'come on', 'padding: 50px;', 'app_20170915_min.css', '---end of file---'].join('\n'),
 ];
 
 var ols = document.querySelectorAll('ol');
@@ -10,7 +12,7 @@ var rightOl = ols[1];
 
 function updateAndRender(fromUpdate) {
   var str = getCurrentStr(fromUpdate);
-  console.log(str)
+  console.log(str);
   var renderData = {left: [], right: []};
   var leftStr = str[0];
   var rightStr = str[1];
@@ -64,6 +66,43 @@ function updateAndRender(fromUpdate) {
       });
     }
   });
+
+  // 处理同一行（算法结果是删除旧行，添加新行）的情况
+  for (var i=0; i<renderData.left.length; i++) {
+    if (renderData.left[i].type == 'empty'
+        && renderData.left[i].showArrow
+        && renderData.left[i+1]
+        && renderData.left[i+1].type == 'edit') {
+      var leftStr = renderData.left[i+1].text;
+      var rightStr = renderData.right[i].text;
+      // 修改 & 合并（删除）
+      renderData.left[i+1].type = 'change';
+      renderData.right[i].type = 'change';
+      renderData.left.splice(i, 1);
+      renderData.right.splice(i+1, 1);
+      // 显示比较：removed & added 的都标记为修改 => 采取重组的方式
+      var charDiff = JsDiff.diffChars(rightStr, leftStr);
+      var modifiedLeft = [];
+      var modifiedRight = [];
+      // 精简代码(前期为了快速编码，采用了复制粘贴的操作，产生了大量冗余的代码)
+      charDiff.forEach(function(d) {
+        if (d.added) {
+          // 标记左边
+          modifiedLeft.push('<span class="diff">' + d.value + '</span>');
+        } else if (d.removed) {
+          // 标记右边
+          modifiedRight.push('<span class="diff">' + d.value + '</span>');
+        } else {
+          modifiedLeft.push(d.value);
+          modifiedRight.push(d.value);
+        }
+      });
+      renderData.left[i].text = modifiedLeft.join('');
+      renderData.right[i].text = modifiedRight.join('');
+      // console.log(charDiff, modifiedLeft.join(''), modifiedRight.join(''));
+    }
+  }
+
   ols.forEach(function(ol) {
     render(ol, renderData, ol.dataset.type);
   });

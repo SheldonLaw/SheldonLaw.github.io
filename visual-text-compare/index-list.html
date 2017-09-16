@@ -9,10 +9,11 @@
     header {}
     article {flex:1;display: flex;margin: 20px 10px;}
     article section {width: 50%;height: 100%;margin: 5px;overflow-y: scroll;} 
-    article section ol li[data-type="edit"] {background-color: red;}
     article section ol button{margin-left: -30px;}
+    article section ol li[data-type="edit"] {background-color: red;}
     article section ol li[data-type="empty"] {background-color: gray;}
-    [contenteditable=true] {outline: none;}
+    article section ol li[data-type="change"] {background-color: #2196f3;}
+    article section ol li span.diff{color: red;}
     footer {padding: 20px;}
   </style>
 </head>
