@@ -1,0 +1,101 @@
+/**
+ * 1px border [[
+ */
+
+/* 默认 b-inner: border在里面，遮盖自身*/
+.b-1 {
+	position:relative;
+}
+.b-1:after {
+	position: absolute;
+	content: "";
+	border:1px red solid;
+}
+.b-1-left:after {
+	top: 0;
+	bottom: 0;
+	left: 0;
+	-webkit-transform-origin:left;
+	transform-origin:left;
+}
+.b-1-right:after {
+	top: 0;
+	bottom: 0;
+	right: 0;
+	-webkit-transform-origin:right;
+	transform-origin:right;
+}
+.b-1-top:after {
+	left: 0;
+	right: 0;
+	top: 0;
+	-webkit-transform-origin:top;
+	transform-origin:top;
+}
+.b-1-bottom:after {
+	left: 0;
+	right: 0;
+	bottom: 0;
+	-webkit-transform-origin:bottom;
+	transform-origin:bottom;
+}
+
+/* b-outer: border在外面，遮盖外部（简写：b-o）*/
+.b-o.b-1-left:after {
+	margin-left: -1px;
+}
+.b-o.b-1-right:after {
+	margin-right: -1px;
+}
+.b-o.b-1-top:after {
+	margin-top: -1px;
+}
+.b-o.b-1-bottom:after {
+	margin-bottom: -1px;
+}
+
+/* b-outer-normal: border在外面，遮盖外部，且border占据空间, 类似border-left效果（简写：b-o-n） */
+
+/* 1px border ]] */
+
+/* 待补充：重写颜色的例子 */
+/* TODO: 写在一起，容易看出区别; */
+
+html {
+    background-color: #f0f0f0;
+}
+.demo {
+    box-sizing: border-box;
+    padding: 0 20px;
+}
+.demo-content {
+	box-sizing: border-box;
+	width: 100%;
+	height: 30px;
+	background-color: black;
+	margin-bottom: 20px;
+}
+.demo-content:nth-child(1) {
+	background-color: #1abc9c; 
+}
+.demo-content:nth-child(2) {
+	background-color: #2ecc71; 
+}
+.demo-content:nth-child(3) {
+	background-color: #3498db; 
+}
+.demo-content:nth-child(4) {
+	background-color: #9b59b6; 
+}
+.border-left {
+	border-left: 1px red solid;
+}
+.border-right {
+	border-right: 1px red solid;
+}
+.border-top {
+	border-top: 1px red solid;
+}
+.border-bottom {
+	border-bottom: 1px red solid;
+}

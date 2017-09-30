@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>1px border demo</title>
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+	<link rel="stylesheet" type="text/css" href="./index.css">
+	<script type="text/javascript" src="./onepx.js"></script>
+</head>
+<body>
+	<section class="demo">
+		<h3>未处理</h3>
+		<section class="demo-1">
+			<div class="demo-content border-left"></div>
+			<div class="demo-content border-right"></div>
+			<div class="demo-content border-top"></div>
+			<div class="demo-content border-bottom"></div>
+		</section>
+		<h3>border覆盖在原内容上</h3>
+		<section class="demo-1">
+			<div class="demo-content b-1 b-1-left"></div>
+			<div class="demo-content b-1 b-1-right"></div>
+			<div class="demo-content b-1 b-1-top"></div>
+			<div class="demo-content b-1 b-1-bottom"></div>
+		</section>
+		<h3>border覆盖在内容外</h3>
+		<section class="demo-1">
+			<div class="demo-content b-1 b-o b-1-left"></div>
+			<div class="demo-content b-1 b-o b-1-right"></div>
+			<div class="demo-content b-1 b-o b-1-top"></div>
+			<div class="demo-content b-1 b-o b-1-bottom"></div>
+		</section>
+		<h3>border在内容外，但不覆盖</h3>
+		<section class="demo-1">
+			<div class="demo-content b-1  b-o-n b-1-left"></div>
+			<div class="demo-content b-1  b-o-n b-1-right"></div>
+			<div class="demo-content b-1  b-o-n b-1-top"></div>
+			<div class="demo-content b-1  b-o-n b-1-bottom"></div>
+		</section>
+	</section>
+</body>
+</html>
