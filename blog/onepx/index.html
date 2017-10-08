@@ -3,39 +3,103 @@
 <head>
 	<meta charset="utf-8">
 	<title>1px border demo</title>
-	<meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
-	<link rel="stylesheet" type="text/css" href="./index.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 	<script type="text/javascript" src="./onepx.js"></script>
+	<link rel="stylesheet" type="text/css" href="./index.css">
 </head>
 <body>
+	<!-- 可以从实际应用场景中抽象出解决方案，没必要大而全，否则就是钻牛角尖和浪费时间 -->
+	<!-- TODO: 简化问题，用于实际产品中 -->
+	<h1>one px border demo</h1>
 	<section class="demo">
-		<h3>未处理</h3>
+		<h3>left</h3>
 		<section class="demo-1">
-			<div class="demo-content border-left"></div>
-			<div class="demo-content border-right"></div>
-			<div class="demo-content border-top"></div>
-			<div class="demo-content border-bottom"></div>
+			<div class="demo-content border-left">未处理</div>
+			<div class="demo-content b-1 b-1-left">border覆盖在原内容上</div>
+			<div class="demo-content b-1 b-o b-1-left">border覆盖在内容外</div>
+			<div class="demo-content b-1 b-o-n b-1-left">border在内容外，但不覆盖</div>
 		</section>
-		<h3>border覆盖在原内容上</h3>
+		<h3>right</h3>
 		<section class="demo-1">
-			<div class="demo-content b-1 b-1-left"></div>
-			<div class="demo-content b-1 b-1-right"></div>
-			<div class="demo-content b-1 b-1-top"></div>
+			<div class="demo-content border-right">未处理</div>
+			<div class="demo-content b-1 b-1-right">border覆盖在原内容上</div>
+			<div class="demo-content b-1 b-o b-1-right">border覆盖在内容外</div>
+			<div class="demo-content b-1 b-o-n b-1-right">border在内容外，但不覆盖</div>
+		</section>
+		<h3>top</h3>
+		<section class="demo-1">
+			<div class="demo-content border-top">未处理</div>
+			<div class="demo-content b-1 b-1-top">border覆盖在原内容上</div>
+			<div class="demo-content b-1 b-o b-1-top">border覆盖在内容外</div>
+			<div class="demo-content b-1 b-o-n b-1-top">border在内容外，但不覆盖</div>
+		</section>
+		<h3>bottom</h3>
+		<section class="demo-1">
+			<div class="demo-content border-bottom">未处理</div>
+			<div class="demo-content b-1 b-1-bottom">border覆盖在原内容上</div>
+			<div class="demo-content b-1 b-o b-1-bottom">border覆盖在内容外</div>
+			<div class="demo-content b-1 b-o-n b-1-bottom">border在内容外，但不覆盖</div>
+		</section>
+		<h3>Scene 1：override border-color</h3>
+		<section class="scene-1">
+			<div class="demo-content b-1 b-1-bottom">.b-1 {border-color: blue !important;}</div>
+		</section>
+		<h3>Scene 2：bottom-link</h3>
+		<section class="scene-2">
+			<a>M链接M</a>
+			<a class="b-1 b-1-left">M链接M</a>
+			<a class="b-1 b-1-left">M链接M</a>
+		</section>
+		<h3>Scene 2：bottom-link - 绝对居中对齐版 - 额外竖线</h3>
+		<section class="scene-2 center">
+			<a>M链接M</a>
+			<div class="b-1 b-1-left"></div>
+			<a>M链接M</a>
+			<div class="b-1 b-1-left"></div>
+			<a>M链接M</a>
+		</section>
+		<h3>Scene 2：bottom-link - 绝对居中对齐版</h3>
+		<section class="scene-2 center-2">
+			<a>M链接M</a>
+			<a class="b-1 b-1-left">M链接M</a>
+			<a class="b-1 b-1-left">M链接M</a>
+		</section>
+		<h3>Scene 3：list-item border - 覆盖在自身</h3>
+		<section class="scene-3">
 			<div class="demo-content b-1 b-1-bottom"></div>
+			<div class="demo-content b-1 b-1-bottom"></div>
+			<div class="demo-content b-1 b-1-bottom"></div>
+			<div class="demo-content b-1"></div>
 		</section>
-		<h3>border覆盖在内容外</h3>
-		<section class="demo-1">
-			<div class="demo-content b-1 b-o b-1-left"></div>
-			<div class="demo-content b-1 b-o b-1-right"></div>
-			<div class="demo-content b-1 b-o b-1-top"></div>
+		<h3>Scene 3：list-item border - b-o 覆盖在内容外 - 会被后面内容遮挡</h3>
+		<section class="scene-3">
 			<div class="demo-content b-1 b-o b-1-bottom"></div>
+			<div class="demo-content b-1 b-o b-1-bottom"></div>
+			<div class="demo-content b-1 b-o b-1-bottom"></div>
+			<div class="demo-content b-1"></div>
 		</section>
-		<h3>border在内容外，但不覆盖</h3>
-		<section class="demo-1">
-			<div class="demo-content b-1  b-o-n b-1-left"></div>
-			<div class="demo-content b-1  b-o-n b-1-right"></div>
-			<div class="demo-content b-1  b-o-n b-1-top"></div>
-			<div class="demo-content b-1  b-o-n b-1-bottom"></div>
+		<h3>Scene 3：list-item border - b-o-n 覆盖在内容外，占据空间</h3>
+		<section class="scene-3">
+			<div class="demo-content b-1 b-o-n b-1-bottom"></div>
+			<div class="demo-content b-1 b-o-n b-1-bottom"></div>
+			<div class="demo-content b-1 b-o-n b-1-bottom"></div>
+			<div class="demo-content b-1"></div>
+		</section>
+		<h3>Scene 3：list-item border - 额外横线</h3>
+		<section class="scene-3 border">
+			<div class="demo-content"></div>
+			<div class="b-1 b-1-bottom"></div>
+			<div class="demo-content"></div>
+			<div class="b-1 b-1-bottom"></div>
+			<div class="demo-content"></div>
+		</section>
+		<h3>Scene 4：override height/width - 微调</h3>
+		<section class="scene-4 case-1">
+			<div class="demo-content b-1 b-1-left"></div>
+		</section>
+		<h3>Scene 4：override height/width - 指定高度</h3>
+		<section class="scene-4 case-2">
+			<div class="demo-content b-1 b-1-left"></div>
 		</section>
 	</section>
 </body>

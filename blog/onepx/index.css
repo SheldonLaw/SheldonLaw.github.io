@@ -5,13 +5,15 @@
 /* 默认 b-inner: border在里面，遮盖自身*/
 .b-1 {
 	position:relative;
+	border-color: red;
 }
 .b-1:after {
 	position: absolute;
 	content: "";
-	border:1px red solid;
+	border-color: inherit !important;
 }
 .b-1-left:after {
+	border-left:1px solid;
 	top: 0;
 	bottom: 0;
 	left: 0;
@@ -19,6 +21,7 @@
 	transform-origin:left;
 }
 .b-1-right:after {
+	border-right:1px solid;
 	top: 0;
 	bottom: 0;
 	right: 0;
@@ -26,6 +29,7 @@
 	transform-origin:right;
 }
 .b-1-top:after {
+	border-top:1px solid;
 	left: 0;
 	right: 0;
 	top: 0;
@@ -33,6 +37,7 @@
 	transform-origin:top;
 }
 .b-1-bottom:after {
+	border-bottom:1px solid;
 	left: 0;
 	right: 0;
 	bottom: 0;
@@ -41,6 +46,7 @@
 }
 
 /* b-outer: border在外面，遮盖外部（简写：b-o）*/
+/* -1px会动态调整 */
 .b-o.b-1-left:after {
 	margin-left: -1px;
 }
@@ -55,11 +61,34 @@
 }
 
 /* b-outer-normal: border在外面，遮盖外部，且border占据空间, 类似border-left效果（简写：b-o-n） */
-
+/* -1px会动态调整 */
+.b-o-n.b-1-left {
+	margin-left: 1px;
+}
+.b-o-n.b-1-left:after {
+	margin-left: -1px;
+}
+.b-o-n.b-1-right {
+	margin-right: 1px;
+}
+.b-o-n.b-1-right:after {
+	margin-right: -1px;
+}
+.b-o-n.b-1-top {
+	margin-top: 1px;
+}
+.b-o-n.b-1-top:after {
+	margin-top: -1px;
+}
+.b-o-n.b-1-bottom {
+	margin-bottom: 1px;
+}
+.b-o-n.b-1-bottom:after {
+	margin-bottom: -1px;
+}
 /* 1px border ]] */
 
-/* 待补充：重写颜色的例子 */
-/* TODO: 写在一起，容易看出区别; */
+/* 待补充：调整高度的例子 */
 
 html {
     background-color: #f0f0f0;
@@ -72,30 +101,64 @@ html {
 	box-sizing: border-box;
 	width: 100%;
 	height: 30px;
-	background-color: black;
-	margin-bottom: 20px;
+	line-height: 30px;
 }
-.demo-content:nth-child(1) {
-	background-color: #1abc9c; 
-}
-.demo-content:nth-child(2) {
-	background-color: #2ecc71; 
-}
-.demo-content:nth-child(3) {
-	background-color: #3498db; 
-}
-.demo-content:nth-child(4) {
-	background-color: #9b59b6; 
-}
+.demo-content:nth-child(1) {background-color: #1abc9c; }
+.demo-content:nth-child(2) {background-color: #2ecc71; }
+.demo-content:nth-child(3) {background-color: #3498db; }
+.demo-content:nth-child(4) {background-color: #9b59b6; }
+.demo-content {background-color: black; }
 .border-left {
-	border-left: 1px red solid;
+	border-left: 1px black solid;
 }
 .border-right {
-	border-right: 1px red solid;
+	border-right: 1px black solid;
 }
 .border-top {
-	border-top: 1px red solid;
+	border-top: 1px black solid;
 }
 .border-bottom {
-	border-bottom: 1px red solid;
+	border-bottom: 1px black solid;
+}
+/* sence-1: 重写颜色; */
+.scene-1 .b-1 {border-color: blue !important;}
+
+/* scene-2: 底部链接对齐; */
+.scene-2 {text-align: center;}
+.scene-2 > a {padding: 0 10px;}
+/* 处理换行带来的间距问题 [[ */
+.scene-2 {font-size: 0;}
+.scene-2 > a {font-size: 16px;}
+/* 处理换行带来的间距问题 ]] */
+.scene-2.center { display: flex; justify-content: center; } /* flex需要兼容处理 */
+.scene-2.center .b-1 {
+	padding: 0;
+  width: 1px;
+  height: 22px;
+}
+.scene-2.center .b-1:after, .scene-2.center-2 .b-1:after {
+	-webkit-transform-origin: center;
+	transform-origin: center;
+}
+.scene-2.center-2 .b-1 {margin-left: -1px;}
+
+/* scene-3: 列表项对齐; */
+.scene-3.border .b-1 {
+	height: 1px;
+	width: 100%;
+}
+.scene-3.border .b-1:after{
+	-webkit-transform-origin: center;
+	transform-origin: center;
+}
+
+/* scene-4: 调整高度、宽度; */
+.scene-4.case-1 .b-1-left:after {
+	top: 3px;
+	bottom: 3px;
+}
+.scene-4.case-2 .b-1-left:after {
+	top: 50%;
+	height: 10px;
+	margin-top: -5px;
 }
