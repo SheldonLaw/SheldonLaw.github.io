@@ -45,12 +45,13 @@
     <img class="right" src="./pre.JPG">
   </div>
 <script type="text/javascript">
+  // TODO：1. 判断上下位移，优化体验 2. 检查高度问题 3. 考虑性能问题 4. 按照实际场景，使用js来动态设置宽度 5. 兼容性检查
+
   var drapBar = document.querySelector('.compare-container .drap-bar');
   var mask = document.querySelector('.compare-container .mask');
 
   // 监听
   drapBar.addEventListener('touchmove', function(e) {
-    // 判断上下位移，优化体验
     if (e.touches.length == 1) {
       var touch = e.touches[0];
       render(touch.clientX);
