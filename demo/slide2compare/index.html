@@ -5,17 +5,17 @@
   <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
   <title>slide to compare</title>
   <style type="text/css">
+    body {
+      margin: 0;
+    }
     .flex {
       display: flex;
     }
     .compare-container {
       position: relative;
-      width: 350px;
       margin: auto;
     }
     .compare-container .left, .compare-container .right {
-      /* 需要固定高度，自适应的话，可以通过js来解决 */
-      width: 350px;
       pointer-events: none;
     }
     .compare-container .right {
@@ -25,46 +25,48 @@
       z-index: -1;
     }
     .compare-container .mask {
-      /* 初始宽度，由js来调整 */
       width: 50%;
+      height: 100%;
       overflow-x: hidden;
-    }
-    .compare-container .drap-bar {
-      width: 15px;
-      transform: translateX(-50%);
-      -webkit-transform: translateX(-50%);
-      /*background-color: #444;*/
     }
   </style>
 </head>
 <body>
   <div class="compare-container">
-    <div class="flex">
-      <div class="mask">
-        <img class="left" src="./now.JPG">
-      </div>
-      <div class="drap-bar"><!--拖动提示条--></div>
+    <div class="mask">
+      <img class="left" src="./now.JPG">
     </div>
     <img class="right" src="./pre.JPG">
   </div>
 <script type="text/javascript">
-  // TODO：1. 判断上下位移，优化体验 2. 检查高度问题 3. 考虑性能问题 4. 按照实际场景，使用js来动态设置宽度 5. 兼容性检查
+  // TODO：1. 判断上下位移，优化体验  3. 考虑性能问题 
 
-  var drapBar = document.querySelector('.compare-container .drap-bar');
-  var mask = document.querySelector('.compare-container .mask');
+  // 前期配置
+  var imgWidth = 547, imgHeight = 470,
+      // 需要处理边距的问题，这个比例需要实验来定，可能是个固定的值
+      domWidth = parseInt(0.8 * window.innerWidth, 10), domHeight = parseInt(domWidth / imgWidth * imgHeight, 10);
+
+  var container = document.querySelector('.compare-container');
+  var mask = container.querySelector('.compare-container .mask');
+
+  var style = document.createElement('style');
+  var styleText = "";
+  styleText += ".compare-container, .compare-container .left, .compare-container .right {width:" + domWidth + "px; height: " + domHeight + "px;}";
+  style.innerText = styleText;
+  document.head.appendChild(style);
 
   // 监听
   var start = 0,
-      width = 175,
+      width = domWidth/2,
       delt = 0,
-      maxWidth = 350;
-  drapBar.addEventListener('touchstart', function(e) {
+      maxWidth = domWidth;
+  container.addEventListener('touchstart', function(e) {
     if (e.touches.length == 1) {
       var touch = e.touches[0];
       start = touch.clientX;
     }
   });
-  drapBar.addEventListener('touchmove', function(e) {
+  container.addEventListener('touchmove', function(e) {
     if (e.touches.length == 1) {
       var touch = e.touches[0];
       // console.log(touch)
@@ -73,7 +75,7 @@
       e.preventDefault();
     }
   });
-  drapBar.addEventListener('touchend', function(e) {
+  container.addEventListener('touchend', function(e) {
     width += delt;
   });
 
