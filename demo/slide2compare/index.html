@@ -16,6 +16,7 @@
     .compare-container .left, .compare-container .right {
       /* 需要固定高度，自适应的话，可以通过js来解决 */
       width: 350px;
+      pointer-events: none;
     }
     .compare-container .right {
       position: absolute;
@@ -29,8 +30,10 @@
       overflow-x: hidden;
     }
     .compare-container .drap-bar {
-      width: 5px;
-      background-color: #444;
+      width: 15px;
+      transform: translateX(-50%);
+      -webkit-transform: translateX(-50%);
+      /*background-color: #444;*/
     }
   </style>
 </head>
@@ -51,16 +54,39 @@
   var mask = document.querySelector('.compare-container .mask');
 
   // 监听
+  var start = 0,
+      width = 175,
+      delt = 0,
+      maxWidth = 350;
+  drapBar.addEventListener('touchstart', function(e) {
+    if (e.touches.length == 1) {
+      var touch = e.touches[0];
+      start = touch.clientX;
+    }
+  });
   drapBar.addEventListener('touchmove', function(e) {
     if (e.touches.length == 1) {
       var touch = e.touches[0];
-      render(touch.clientX);
+      // console.log(touch)
+      delt = touch.clientX - start;
+      render(width + delt);
       e.preventDefault();
     }
   });
+  drapBar.addEventListener('touchend', function(e) {
+    width += delt;
+  });
 
-  function render(width) {
-    mask.style.width = width + 'px';
+  function render(curWidth) {
+    if (curWidth < 0) {
+      width = 0;
+      curWidth = 0;
+    }
+    if (curWidth > maxWidth) {
+      width = maxWidth;
+      curWidth = maxWidth;
+    }
+    mask.style.width = curWidth + 'px';
   }
 </script>
 </body>
